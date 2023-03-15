@@ -2,13 +2,11 @@
 ## Introduction
 - Handelsunternehmen - mehrere Lagern - verschiedene Produkte in verschiedenen Mengen-
 - Lieferung Kunden einem oder mehreren Lagern.
-<br>
-___
 
+___
 ## Ziel
 - Kunde alle Produkte erhält - Kosten für Auslieferung möglichst gering.
 ___
-
 ## Codebase Infos
 - Einsprungpunkt ist ```run()``` in Solution.cs
 
@@ -24,12 +22,10 @@ ___
 - Entfernung von Position zu anderer<br>
     ```position.CalculateDistance(Position other)```
 ___
-
 ## Berechnung
 - Kosten errechnen sich aus gesamte Größe (```Summe von Product.Size```) und Distanz.<br>
 Es werden immer alle Sendungen aufsummiert.
 ___
-
 ## Hints
 - Zu einem Kunden kann es mehrere OrderLines geben, diese sind nicht
 zwingend aufeinander folgend in der Liste.
@@ -66,11 +62,9 @@ ___
     können von dort versendet werden. Ein Lager hat auch eine Adresse die als Position
     mit X und Y Koordinaten bestimmt ist.
 ___
-
 ## Conditions
 - Ein Produkt kann nur aus einem Lager versendet werden, in dem es noch gelagert ist. Wenn es versendet wird, verringert sich die verfügbare Anzahl des Produktes im Lager um 1.
 - Eine bestellte Auftragszeile darf nur einmal an den Kunden geliefert werden.
 - Nur bestellte Zeilen können aus einem Lager versendet werden.
 ___
-
 <img src="https://user-images.githubusercontent.com/91200978/225241150-bb39670d-c319-401b-b36d-fd1ae9bc141b.png" alt= “class-diagram” width="40%">
