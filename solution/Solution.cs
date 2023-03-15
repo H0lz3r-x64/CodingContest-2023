@@ -70,6 +70,7 @@ namespace com.knapp.CodingContest.solution
                 {
                     if (wh.HasStock(order.Product))
                     {
+
                         closest = wh;
                         break;
                     }
