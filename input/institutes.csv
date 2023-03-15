@@ -1,0 +1,41 @@
+# -----------------------------------------------------------------------------
+# -- groups
+C ; _REF_                 ;
+A ; UNIs, FHs & Sonstige  ;
+B ; HTLs & Schulen        ;
+#D ; _ALL_                 ;
+
+# -----------------------------------------------------------------------------
+# -- institutions
+# .............................................................................
+# UNIs, FHs & Sonstige
+
+FH_Campus_02                      ; A ; FH Campus02                      ;                                                                                                                                                                               
+FH_Joanneum                       ; A ; FH JOANNEUM                      ;
+Johannes_Kepler_Universitaet_Linz ; A ; Johannes Kepler Universität Linz ;   
+TU_Graz                           ; A ; TU-Graz                          ;   
+TU_Wien                           ; A ; TU Wien                          ;   
+                                                                         
+Sonstige                          ; A ; Sonstige                         ;
+                                  
+# .............................................................................
+# HTLs & Schulen                  
+                                  
+HAK_Feldbach                      ; B ; HAK Feldbach                     ;
+HTBLA_Kaindorf_Sulm               ; B ; HTBLA Kaindorf/Sulm              ;
+HTBLuVA_Pinkafeld                 ; B ; HTBLuVA Pinkafeld                ;
+HTL_Bulme_Graz                    ; B ; HTL Bulme Graz-Gösting           ;
+HTL_Rennweg_Wien                  ; B ; HTL Rennweg - Wien               ;
+HTL_Villach                       ; B ; HTL Villach                      ;
+HTL_Weiz                          ; B ; HTL Weiz                         ;
+HTL_Wien_West                     ; B ; HTL Wien West                    ;
+Sacre_Coeur_Graz                  ; B ; Sacre-Coeur Graz                 ;
+
+SonstigeSchule                    ; B ; Sonstige Schule                  ;
+_Knapp_                           ; B ; KNAPP Lehrling                   ;
+
+# -----------------------------------------------------------------------------
+
+__REFERENCE__                     ; C ; __REFERENCE__                    ;
+
+# -----------------------------------------------------------------------------
