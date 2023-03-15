@@ -54,48 +54,68 @@ namespace com.knapp.CodingContest.solution
         /// </summary>
         public virtual void Run()
         {
-            //Ein Produkt kann nur aus einem Lager versendet werden, in dem es noch gelagert ist.
-            
-            //Wenn es versendet wird, verringert sich die verfügbare Anzahl des Produktes im Lager um 1.
+            #region Setup
+            //Sort by customers and then by Products
+            List<OrderLine> orderLines = input.GetOrderLines().ToList<OrderLine>();
+            orderLines = orderLines.OrderBy(x => x.Customer.Code).ThenBy(y => y.Product.Code).ToList();
 
-            //Eine bestellte Auftragszeile darf nur einmal an den Kunden geliefert werden.
+            // Initialize variables
+            string lastCustomerCode = orderLines[0].Customer.Code;
+            string lastProductCode = orderLines[0].Product.Code;
+            Warehouse nearestWh = findAnyWarehouseWithStock(orderLines[0], orderLines);
+            #endregion
 
-            //Nur bestellte Zeilen können aus einem Lager versendet werden.
-
-            foreach (OrderLine order in input.GetOrderLines())
+            int i = 0;
+            foreach (OrderLine order in orderLines)
             {
-                Warehouse closest = null;
+                // TODO: Noch ned richtig da es derweil grob alle produkte nur zum am nähesten des ersten bringt
 
-                foreach (Warehouse wh in input.GetWarehouses())
+                // check
+                if (lastCustomerCode != order.Customer.Code)
                 {
-                    if (wh.HasStock(order.Product))
-                    {
-
-                        closest = wh;
-                        break;
-                    }
+                    // if calculate the nearest again
+                    nearestWh = findNearestWarehouse(order, orderLines);
                 }
-
-                if (closest == null)
+                else if (!nearestWh.HasStock(order.Product))
                 {
-                    return;
+                    nearestWh = findNearestWarehouse(order, orderLines);
                 }
-
-                foreach (Warehouse wh in input.GetWarehouses())
-                {
-                    if (wh.HasStock(order.Product))
-                    {
-                        double currDist = order.Customer.Position.CalculateDistance(wh.Position);
-                        if (currDist < closest.Position.CalculateDistance(wh.Position))
-                        {
-                            closest = wh;
-                        }
-                    }
-                }
-                operations.Ship(order, closest);
-
+                operations.Ship(order, nearestWh);
+                lastCustomerCode = order.Customer.Code;
+                lastProductCode = order.Product.Code;
+                i++;
             }
+        }
 
+        public Warehouse findNearestWarehouse(OrderLine order, List<OrderLine> orders)
+        {
+            // get the nearest warehouse to the customer
+            Warehouse nearestWh = findAnyWarehouseWithStock(order, orders);
+            foreach (Warehouse wh in input.GetWarehouses())
+            {
+                if (wh.HasStock(order.Product))
+                {
+                    double currDist = order.Customer.Position.CalculateDistance(wh.Position);
+                    if (currDist < nearestWh.Position.CalculateDistance(wh.Position))
+                    {
+                        nearestWh = wh;
+                    }
+                }
+            }
+            return nearestWh;
+        }
+
+        public Warehouse findAnyWarehouseWithStock(OrderLine order, List<OrderLine> orders)
+        {
+            Warehouse warehouse = null;
+            // just set warehouse to any which has it in stock
+            foreach (Warehouse wh in input.GetWarehouses())
+                if (wh.HasStock(order.Product))
+                {
+                    warehouse = wh;
+                    break;
+                }
+            return warehouse;
         }
 
         /// <summary>
